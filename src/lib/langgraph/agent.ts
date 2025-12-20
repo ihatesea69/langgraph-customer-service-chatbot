@@ -28,7 +28,7 @@ let compiledAgent: ReturnType<typeof createAgent> | null = null;
 
 function createAgent() {
   const model = new ChatGoogleGenerativeAI({
-    model: "gemini-2.0-flash",
+    model: "gemini-1.5-flash",
     temperature: 0.7,
     maxOutputTokens: 1024,
   }).bindTools(tools);
