@@ -1,0 +1,124 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Nồi cơm điện thông minh",
+      "category": "Nhà bếp",
+      "price": 1500000,
+      "description": "Nồi cơm điện 1.8L với công nghệ nấu 3D, giữ ấm 24h. Phù hợp cho gia đình 4-6 người.",
+      "features": ["Công nghệ nấu 3D", "Giữ ấm 24h", "Chống dính cao cấp", "Hẹn giờ nấu"],
+      "inStock": true
+    },
+    {
+      "id": "2",
+      "name": "Máy xay sinh tố đa năng",
+      "category": "Nhà bếp",
+      "price": 850000,
+      "description": "Máy xay sinh tố 1000W với 4 lưỡi dao, xay nhuyễn mọi loại thực phẩm. Cối thủy tinh 1.5L.",
+      "features": ["Công suất 1000W", "4 lưỡi dao", "Cối thủy tinh 1.5L", "3 chế độ xay"],
+      "inStock": true
+    },
+    {
+      "id": "3",
+      "name": "Bình đun siêu tốc",
+      "category": "Nhà bếp",
+      "price": 450000,
+      "description": "Bình đun nước 1.7L, đun sôi trong 3 phút. Tự động ngắt khi nước sôi.",
+      "features": ["Dung tích 1.7L", "Đun sôi 3 phút", "Tự động ngắt", "Thép không gỉ 304"],
+      "inStock": true
+    },
+    {
+      "id": "4",
+      "name": "Chảo chống dính ceramic",
+      "category": "Nhà bếp",
+      "price": 380000,
+      "description": "Chảo ceramic 28cm, không dính, ít dầu mỡ. An toàn cho sức khỏe, không chứa PFOA.",
+      "features": ["Đường kính 28cm", "Lớp ceramic cao cấp", "Không PFOA", "Tay cầm cách nhiệt"],
+      "inStock": true
+    },
+    {
+      "id": "5",
+      "name": "Máy hút bụi cầm tay",
+      "category": "Vệ sinh",
+      "price": 1200000,
+      "description": "Máy hút bụi không dây, pin lithium, hoạt động 45 phút. Nhẹ chỉ 1.5kg, dễ di chuyển.",
+      "features": ["Không dây", "Pin 45 phút", "Trọng lượng 1.5kg", "Lọc HEPA"],
+      "inStock": true
+    },
+    {
+      "id": "6",
+      "name": "Quạt điều hòa mini",
+      "category": "Điện gia dụng",
+      "price": 2500000,
+      "description": "Quạt làm mát không khí, tiết kiệm điện hơn điều hòa 80%. Công suất 65W, phù hợp phòng 15-20m2.",
+      "features": ["Công suất 65W", "Phù hợp 15-20m2", "3 tốc độ gió", "Bộ lọc bụi"],
+      "inStock": false
+    },
+    {
+      "id": "7",
+      "name": "Nồi chiên không dầu",
+      "category": "Nhà bếp",
+      "price": 1800000,
+      "description": "Nồi chiên không dầu 5.5L, màn hình cảm ứng, 8 chế độ nấu sẵn. Giảm 80% dầu mỡ.",
+      "features": ["Dung tích 5.5L", "Màn hình cảm ứng", "8 chế độ nấu", "Giảm 80% dầu mỡ"],
+      "inStock": true
+    },
+    {
+      "id": "8",
+      "name": "Bàn ủi hơi nước",
+      "category": "Điện gia dụng",
+      "price": 650000,
+      "description": "Bàn ủi hơi nước 2400W, mặt đế ceramic, phun hơi mạnh. Ủi phẳng mọi loại vải.",
+      "features": ["Công suất 2400W", "Mặt đế ceramic", "Phun hơi mạnh", "Chống đóng cặn"],
+      "inStock": true
+    },
+    {
+      "id": "9",
+      "name": "Máy ép chậm trái cây",
+      "category": "Nhà bếp",
+      "price": 3200000,
+      "description": "Máy ép chậm 150W, giữ nguyên vitamin và enzyme. Ép được cả rau củ cứng.",
+      "features": ["Công nghệ ép chậm", "Giữ vitamin", "Trục ép xoắn ốc", "Dễ vệ sinh"],
+      "inStock": true
+    },
+    {
+      "id": "10",
+      "name": "Đèn bàn LED thông minh",
+      "category": "Điện gia dụng",
+      "price": 420000,
+      "description": "Đèn LED bảo vệ mắt, điều chỉnh 5 mức sáng, 3 nhiệt độ màu. Sạc USB, dùng 8 giờ không dây.",
+      "features": ["5 mức sáng", "3 nhiệt độ màu", "Sạc USB", "Pin 8 giờ"],
+      "inStock": true
+    },
+    {
+      "id": "11",
+      "name": "Bộ dao nhà bếp 5 món",
+      "category": "Nhà bếp",
+      "price": 890000,
+      "description": "Bộ dao inox 5 món: dao chặt, dao thái, dao gọt, kéo, thanh mài. Lưỡi sắc bén, cán gỗ tự nhiên.",
+      "features": ["5 món đầy đủ", "Inox cao cấp", "Cán gỗ tự nhiên", "Có hộp đựng"],
+      "inStock": true
+    },
+    {
+      "id": "12",
+      "name": "Thùng rác thông minh",
+      "category": "Vệ sinh",
+      "price": 750000,
+      "description": "Thùng rác cảm ứng 12L, tự động mở nắp khi đưa tay lại gần. Vỏ inox chống vân tay.",
+      "features": ["Cảm biến tự động", "Dung tích 12L", "Inox chống vân tay", "Pin AA"],
+      "inStock": true
+    }
+  ],
+  "categories": ["Nhà bếp", "Vệ sinh", "Điện gia dụng"],
+  "shopInfo": {
+    "name": "HomeShop - Đồ gia dụng chất lượng",
+    "address": "123 Nguyễn Văn Linh, Quận 7, TP.HCM",
+    "phone": "0901 234 567",
+    "openHours": "8:00 - 21:00 hàng ngày",
+    "policies": {
+      "warranty": "Bảo hành 12 tháng cho tất cả sản phẩm",
+      "return": "Đổi trả miễn phí trong 7 ngày",
+      "shipping": "Miễn phí ship cho đơn từ 500.000đ"
+    }
+  }
+}
