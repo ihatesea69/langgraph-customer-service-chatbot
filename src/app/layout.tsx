@@ -8,9 +8,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "HomeShop AI - Tư vấn đồ gia dụng",
-  description: "Chatbot AI thông minh tư vấn sản phẩm gia dụng. Tìm kiếm nồi cơm, máy xay, bình đun và nhiều sản phẩm khác.",
-  keywords: ["đồ gia dụng", "tư vấn AI", "mua sắm online", "nồi cơm điện", "máy xay"],
+  title: "HieuNghiGPT - AI Chatbot thế hệ mới",
+  description: "Trợ lý AI thông minh với công nghệ LangGraph tiên tiến. Tư vấn sản phẩm, trò chuyện tự nhiên, hoàn toàn miễn phí.",
+  keywords: ["AI chatbot", "LangGraph", "GPT", "tư vấn AI", "HieuNghiGPT"],
 };
 
 export default function RootLayout({
