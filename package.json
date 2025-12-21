@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@langchain/core": "^1.1.7",
-    "@langchain/google-genai": "^2.1.2",
     "@langchain/langgraph": "^1.0.7",
+    "@langchain/openai": "^1.2.0",
+    "@vercel/kv": "^3.0.0",
     "next": "16.1.0",
+    "next-auth": "^5.0.0-beta.30",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "uuid": "^13.0.0",

@@ -1,4 +1,4 @@
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import { ChatOpenAI } from "@langchain/openai";
 import { StateGraph, MessagesAnnotation, END, START } from "@langchain/langgraph";
 import { ToolNode } from "@langchain/langgraph/prebuilt";
 import { AIMessage, BaseMessage, HumanMessage, SystemMessage } from "@langchain/core/messages";
@@ -27,10 +27,10 @@ const SYSTEM_PROMPT = `Bạn là tư vấn viên AI của HomeShop - cửa hàng
 let compiledAgent: ReturnType<typeof createAgent> | null = null;
 
 function createAgent() {
-  const model = new ChatGoogleGenerativeAI({
-    model: "gemini-1.5-flash",
+  const model = new ChatOpenAI({
+    model: "gpt-4o-mini",
     temperature: 0.7,
-    maxOutputTokens: 1024,
+    maxTokens: 1024,
   }).bindTools(tools);
 
   async function callAgent(state: typeof MessagesAnnotation.State) {

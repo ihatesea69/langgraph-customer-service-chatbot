@@ -1,68 +1,40 @@
+import { auth } from "@/lib/auth";
 import { invokeAgent } from "@/lib/langgraph/agent";
+import { tokenUsage } from "@/lib/token-usage";
 import { HumanMessage, AIMessage } from "@langchain/core/messages";
 import { NextRequest, NextResponse } from "next/server";
-
-// NOTE: In-memory rate limiting is best-effort on serverless.
-// For production, use Vercel KV or Upstash Redis.
-const rateLimitMap = new Map<
-  string,
-  { timestamps: number[]; lastCleanup: number }
->();
-const RATE_LIMIT = 10; // requests
-const RATE_WINDOW = 60 * 1000; // 1 minute
-const CLEANUP_INTERVAL = 5 * 60 * 1000; // 5 minutes
-
-function getClientIP(req: NextRequest): string {
-  const forwarded = req.headers.get("x-forwarded-for");
-  const ip = forwarded?.split(",")[0]?.trim();
-  // Validate IP and require actual IP
-  if (!ip || ip === "::1" || ip === "127.0.0.1") {
-    return req.headers.get("x-real-ip") || "unknown";
-  }
-  return ip;
-}
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const entry = rateLimitMap.get(ip) || { timestamps: [], lastCleanup: now };
-  const recentRequests = entry.timestamps.filter(
-    (time) => now - time < RATE_WINDOW
-  );
-
-  if (recentRequests.length >= RATE_LIMIT) {
-    return false;
-  }
-
-  recentRequests.push(now);
-  rateLimitMap.set(ip, {
-    timestamps: recentRequests,
-    lastCleanup: entry.lastCleanup,
-  });
-
-  // Periodic cleanup of stale entries
-  if (now - entry.lastCleanup > CLEANUP_INTERVAL) {
-    for (const [key, val] of rateLimitMap.entries()) {
-      if (val.timestamps.every((t) => now - t > RATE_WINDOW)) {
-        rateLimitMap.delete(key);
-      }
-    }
-  }
-
-  return true;
-}
 
 interface ChatMessage {
   role: "user" | "assistant";
   content: string;
 }
 
+// Estimate tokens (rough: 1 token ≈ 4 chars for English, 2 chars for Vietnamese)
+function estimateTokens(text: string): number {
+  return Math.ceil(text.length / 2);
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const ip = getClientIP(req);
-
-    if (!checkRateLimit(ip)) {
+    // Auth check
+    const session = await auth();
+    if (!session?.user?.id) {
       return NextResponse.json(
-        { error: "Quá nhiều yêu cầu. Vui lòng đợi một phút." },
+        { error: "Vui lòng đăng nhập để sử dụng" },
+        { status: 401 }
+      );
+    }
+
+    const userId = session.user.id;
+
+    // Check token limit
+    const { allowed, remaining } = await tokenUsage.canUse(userId);
+    if (!allowed) {
+      return NextResponse.json(
+        { 
+          error: "Bạn đã hết quota hôm nay (10,000 tokens). Thử lại vào ngày mai.",
+          remaining: 0 
+        },
         { status: 429 }
       );
     }
@@ -85,7 +57,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Validate and sanitize history array (SEC-03)
+    // Validate history
     const MAX_HISTORY = 20;
     const MAX_CONTENT_LENGTH = 1000;
     const validatedHistory: ChatMessage[] = Array.isArray(history)
@@ -104,7 +76,7 @@ export async function POST(req: NextRequest) {
           }))
       : [];
 
-    // Convert history to LangChain messages
+    // Convert to LangChain messages
     const langchainMessages = validatedHistory.map((msg) =>
       msg.role === "user"
         ? new HumanMessage(msg.content)
@@ -114,7 +86,20 @@ export async function POST(req: NextRequest) {
     // Invoke agent
     const response = await invokeAgent(langchainMessages, message);
 
-    return NextResponse.json({ response });
+    // Track token usage (input + output)
+    const inputTokens = estimateTokens(message + validatedHistory.map(m => m.content).join(""));
+    const outputTokens = estimateTokens(response);
+    const totalTokens = inputTokens + outputTokens;
+    await tokenUsage.addUsage(userId, totalTokens);
+
+    // Get updated remaining
+    const updated = await tokenUsage.canUse(userId);
+
+    return NextResponse.json({ 
+      response,
+      remaining: updated.remaining,
+      used: totalTokens,
+    });
   } catch (error) {
     console.error("Chat API error:", error);
     return NextResponse.json(
@@ -124,3 +109,21 @@ export async function POST(req: NextRequest) {
   }
 }
 
+// GET endpoint to check remaining tokens
+export async function GET() {
+  try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { remaining } = await tokenUsage.canUse(session.user.id);
+    return NextResponse.json({ 
+      remaining,
+      limit: tokenUsage.DAILY_LIMIT,
+    });
+  } catch (error) {
+    console.error("Token check error:", error);
+    return NextResponse.json({ error: "Error" }, { status: 500 });
+  }
+}
