@@ -130,15 +130,19 @@ export default function LandingPage() {
         </motion.div>
       </section>
 
-      {/* SOCIAL PROOF */}
-      <section className="py-16 border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6">
-          <p className="text-center text-sm text-white/30 mb-10 tracking-widest uppercase">Trusted by developers from</p>
-          <div className="flex flex-wrap justify-center items-center gap-10 lg:gap-16">
-            {["GitHub", "Vercel", "OpenAI", "LangChain", "Upstash"].map((name) => (
-              <span key={name} className="text-xl font-semibold text-white/30 hover:text-white/50 transition-colors">
-                {name}
-              </span>
+      {/* SOCIAL PROOF - Infinite Scroll */}
+      <section className="py-16 border-b border-white/5 overflow-hidden">
+        <p className="text-center text-sm text-white/30 mb-10 tracking-widest uppercase">Trusted by developers from</p>
+        <div className="relative">
+          <div className="flex animate-marquee whitespace-nowrap">
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="flex items-center gap-16 mx-8">
+                {["GitHub", "Vercel", "OpenAI", "LangChain", "Upstash", "Next.js", "React", "TypeScript"].map((name) => (
+                  <span key={`${i}-${name}`} className="text-xl font-semibold text-white/30 hover:text-white/50 transition-colors">
+                    {name}
+                  </span>
+                ))}
+              </div>
             ))}
           </div>
         </div>
@@ -411,16 +415,6 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-10 border-t border-white/5 text-center">
-        <p className="text-sm text-white/30">
-          2025 HieuNghiGPT. Built by{" "}
-          <a href="https://github.com/ihatesea69" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors">
-            ihatesea69
-          </a>
-        </p>
-      </footer>
     </main>
   );
 }
