@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth";
 import { invokeAgent } from "@/lib/langgraph/agent";
 import { tokenUsage } from "@/lib/token-usage";
+import { conversationService } from "@/lib/conversations";
 import { HumanMessage, AIMessage } from "@langchain/core/messages";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -41,6 +42,7 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const message = body.message?.trim();
+    const conversationId = body.conversationId;
     const history = body.history;
 
     if (!message || typeof message !== "string") {
@@ -91,6 +93,22 @@ export async function POST(req: NextRequest) {
     const outputTokens = estimateTokens(response);
     const totalTokens = inputTokens + outputTokens;
     await tokenUsage.addUsage(userId, totalTokens);
+
+    // Save messages to conversation if conversationId provided
+    if (conversationId) {
+      await conversationService.addMessage(userId, conversationId, {
+        id: `user-${Date.now()}`,
+        role: "user",
+        content: message,
+        timestamp: Date.now(),
+      });
+      await conversationService.addMessage(userId, conversationId, {
+        id: `assistant-${Date.now()}`,
+        role: "assistant",
+        content: response,
+        timestamp: Date.now(),
+      });
+    }
 
     // Get updated remaining
     const updated = await tokenUsage.canUse(userId);
