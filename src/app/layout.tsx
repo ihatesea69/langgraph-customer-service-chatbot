@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import Providers from "@/components/Providers";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin", "vietnamese"],
+const sfPro = localFont({
+  src: "../../public/fonts/SF-Pro-Display-Heavy.ttf",
+  display: "swap",
+  variable: "--font-sf-pro",
 });
 
 export const metadata: Metadata = {
-  title: "HieuNghiGPT - AI Chatbot thế hệ mới",
-  description: "Trợ lý AI thông minh với công nghệ LangGraph tiên tiến. Tư vấn sản phẩm, trò chuyện tự nhiên, hoàn toàn miễn phí.",
-  keywords: ["AI chatbot", "LangGraph", "GPT", "tư vấn AI", "HieuNghiGPT"],
+  title: "HieuNghiGPT - Your AI Coding Teammate",
+  description: "AI-powered coding assistant built with LangGraph. Ask anything about code, debugging, architecture - get instant answers. Free 10K tokens/day.",
+  keywords: ["AI chatbot", "LangGraph", "GPT", "coding assistant", "HieuNghiGPT"],
 };
 
 export default function RootLayout({
@@ -19,8 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi">
-      <body className={`${inter.className} antialiased`}>
+    <html lang="en">
+      <body className={`${sfPro.className} antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

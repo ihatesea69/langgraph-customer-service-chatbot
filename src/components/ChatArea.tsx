@@ -64,7 +64,7 @@ export default function ChatArea({
               </div>
               <h1 className="text-2xl font-medium text-white mb-2">HieuNghiGPT</h1>
               <p className="text-white/50">
-                Hỏi tôi bất cứ điều gì. Tôi sẵn sàng hỗ trợ bạn.
+                Ask me anything. I'm here to help.
               </p>
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function ChatArea({
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Nhập tin nhắn..."
+              placeholder="Type a message..."
               rows={1}
               disabled={isLoading || remainingTokens === 0}
               className="w-full bg-[#2f2f2f] border border-white/10 rounded-2xl px-4 py-3 pr-12 text-white placeholder-white/40 focus:outline-none focus:ring-1 focus:ring-white/20 resize-none disabled:opacity-50"
@@ -142,7 +142,7 @@ export default function ChatArea({
           </form>
           {remainingTokens !== null && (
             <p className="text-center text-xs text-white/30 mt-2">
-              {remainingTokens.toLocaleString()} tokens còn lại hôm nay
+              {remainingTokens.toLocaleString()} tokens remaining today
             </p>
           )}
         </div>

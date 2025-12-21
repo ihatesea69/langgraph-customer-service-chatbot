@@ -38,7 +38,7 @@ export default function Sidebar({
         <button
           onClick={onToggle}
           className="p-2 hover:bg-white/10 rounded-lg mb-4"
-          title="Mở sidebar"
+          title="Open sidebar"
         >
           <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -47,7 +47,7 @@ export default function Sidebar({
         <button
           onClick={onNew}
           className="p-2 hover:bg-white/10 rounded-lg"
-          title="Cuộc hội thoại mới"
+          title="New chat"
         >
           <svg className="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -68,12 +68,12 @@ export default function Sidebar({
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
           </svg>
-          Cuộc hội thoại mới
+          New chat
         </button>
         <button
           onClick={onToggle}
           className="ml-2 p-2 hover:bg-white/10 rounded-lg"
-          title="Thu gọn sidebar"
+          title="Collapse sidebar"
         >
           <svg className="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
@@ -85,7 +85,7 @@ export default function Sidebar({
       <div className="flex-1 overflow-y-auto py-2">
         {conversations.length === 0 ? (
           <p className="px-3 py-4 text-sm text-white/40 text-center">
-            Chưa có cuộc hội thoại nào
+            No conversations yet
           </p>
         ) : (
           conversations.map((conv) => (
@@ -111,7 +111,7 @@ export default function Sidebar({
                       onDelete(conv.id);
                     }}
                     className="p-1 hover:bg-white/10 rounded"
-                    title="Xóa"
+                    title="Delete"
                   >
                     <svg className="w-4 h-4 text-white/50 hover:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -143,7 +143,7 @@ export default function Sidebar({
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
               className="p-1 hover:bg-white/10 rounded"
-              title="Đăng xuất"
+              title="Sign out"
             >
               <svg className="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
