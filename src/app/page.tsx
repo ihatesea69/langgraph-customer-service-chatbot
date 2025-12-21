@@ -35,8 +35,8 @@ export default function LandingPage() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-6 bg-gradient-to-b from-black/80 to-transparent backdrop-blur-sm">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-emerald-500 flex items-center justify-center">
-            <span className="text-xl font-bold">H</span>
+          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center">
+            <span className="text-xl font-bold text-black">H</span>
           </div>
           <span className="text-xl font-semibold tracking-tight">HieuNghiGPT</span>
         </div>
@@ -69,7 +69,7 @@ export default function LandingPage() {
               Code smarter,
             </span>
             <br />
-            <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-emerald-400 bg-clip-text text-transparent">
+            <span className="text-white">
               not harder.
             </span>
           </motion.h1>
@@ -91,7 +91,7 @@ export default function LandingPage() {
           >
             <Link
               href="/chat"
-              className="group px-10 py-5 bg-gradient-to-r from-violet-600 to-emerald-600 rounded-2xl font-semibold text-lg transition-all hover:scale-105 hover:shadow-[0_0_60px_rgba(139,92,246,0.4)]"
+              className="group px-10 py-5 bg-white text-black rounded-2xl font-semibold text-lg transition-all hover:scale-105 hover:bg-gray-100"
             >
               <span className="flex items-center gap-2">
                 Start for free
@@ -209,7 +209,7 @@ export default function LandingPage() {
             className="text-center mb-20"
           >
             <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-              An AI that <span className="bg-gradient-to-r from-violet-400 to-emerald-400 bg-clip-text text-transparent">actually gets it</span>
+              An AI that <span className="text-white">actually gets it</span>
             </h2>
             <p className="text-xl text-white/50 max-w-2xl mx-auto">
               Built with cutting-edge agent technology
@@ -223,9 +223,9 @@ export default function LandingPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="md:col-span-2 p-8 rounded-3xl bg-gradient-to-br from-violet-500/20 to-violet-500/5 border border-violet-500/20 hover:border-violet-500/40 transition-all"
+              className="md:col-span-2 p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
             >
-              <div className="w-14 h-14 rounded-2xl bg-violet-500 flex items-center justify-center mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
@@ -242,9 +242,9 @@ export default function LandingPage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="p-8 rounded-3xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 border border-emerald-500/20 hover:border-emerald-500/40 transition-all"
+              className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
             >
-              <div className="w-14 h-14 rounded-2xl bg-emerald-500 flex items-center justify-center mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
@@ -373,7 +373,7 @@ export default function LandingPage() {
       </section>
 
       {/* FINAL CTA - Action */}
-      <section className="py-32 bg-gradient-to-br from-violet-600/20 via-black to-emerald-600/20">
+      <section className="py-32 bg-[#0a0a0a]">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}

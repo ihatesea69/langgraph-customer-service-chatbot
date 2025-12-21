@@ -72,13 +72,8 @@ export default function ChatArea({
         {messages.length === 0 ? (
           <div className="h-full flex items-center justify-center">
             <div className="text-center max-w-lg mx-auto px-6">
-              <div className="w-20 h-20 mx-auto mb-8 relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-500 to-emerald-500 rounded-2xl rotate-3 opacity-30" />
-                <div className="relative w-full h-full bg-gradient-to-br from-violet-500 to-emerald-500 rounded-2xl flex items-center justify-center">
-                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                </div>
+              <div className="w-16 h-16 mx-auto mb-8 bg-white rounded-2xl flex items-center justify-center">
+                <span className="text-3xl font-bold text-black">H</span>
               </div>
               <h1 className="text-3xl font-bold text-white mb-4">How can I help you today?</h1>
               <p className="text-white/50 text-lg mb-8">
@@ -113,17 +108,15 @@ export default function ChatArea({
                   {/* Avatar */}
                   <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${
                     msg.role === "user"
-                      ? "bg-gradient-to-br from-blue-500 to-blue-600"
-                      : "bg-gradient-to-br from-violet-500 to-emerald-500"
+                      ? "bg-gray-600"
+                      : "bg-white"
                   }`}>
                     {msg.role === "user" ? (
                       <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                       </svg>
                     ) : (
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
+                      <span className="text-lg font-bold text-black">H</span>
                     )}
                   </div>
 
@@ -180,10 +173,8 @@ export default function ChatArea({
             {isLoading && (
               <div className="px-4 py-6 bg-[#2a2a2a]">
                 <div className="flex gap-4 max-w-3xl mx-auto">
-                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-emerald-500 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
+                  <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg font-bold text-black">H</span>
                   </div>
                   <div className="flex items-center gap-1 py-3">
                     <span className="w-2 h-2 bg-white/50 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
@@ -210,14 +201,14 @@ export default function ChatArea({
               placeholder="Message HieuNghiGPT..."
               rows={1}
               disabled={isLoading || remainingTokens === 0}
-              className="w-full bg-[#2f2f2f] border border-white/10 rounded-2xl px-5 py-4 pr-14 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-transparent resize-none disabled:opacity-50 transition-all"
+              className="w-full bg-[#2f2f2f] border border-white/10 rounded-2xl px-5 py-4 pr-14 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent resize-none disabled:opacity-50 transition-all"
             />
             <button
               type="submit"
               disabled={!input.trim() || isLoading || remainingTokens === 0}
-              className="absolute right-3 bottom-3 p-2 bg-violet-500 hover:bg-violet-600 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed disabled:bg-white/10 transition-all"
+              className="absolute right-3 bottom-3 p-2 bg-white hover:bg-gray-200 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed disabled:bg-white/10 transition-all"
             >
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
               </svg>
             </button>
@@ -226,7 +217,7 @@ export default function ChatArea({
             <div className="flex items-center justify-center gap-2 mt-3">
               <div className="w-24 h-1.5 bg-white/10 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-violet-500 to-emerald-500 rounded-full transition-all"
+                  className="h-full bg-white rounded-full transition-all"
                   style={{ width: `${Math.min((remainingTokens / 10000) * 100, 100)}%` }}
                 />
               </div>
