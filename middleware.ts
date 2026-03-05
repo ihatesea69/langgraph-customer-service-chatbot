@@ -4,9 +4,6 @@ import type { NextRequest } from "next/server";
 // Paths that require authentication
 const PROTECTED_PATHS = ["/chat", "/api/chat"];
 
-// Paths that are only accessible to unauthenticated users
-const AUTH_PATHS = ["/login"];
-
 // Admin paths that require admin auth
 const ADMIN_PATHS = ["/admin", "/api/admin"];
 
