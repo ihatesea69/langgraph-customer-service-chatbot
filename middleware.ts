@@ -34,13 +34,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(adminLoginUrl);
   }
 
-  // Redirect authenticated users away from login page
-  const isAuthPath = AUTH_PATHS.some((path) => pathname.startsWith(path));
-  
-  if (isAuthPath && sessionId) {
-    return NextResponse.redirect(new URL("/chat", request.url));
-  }
-
   // Add security headers
   const response = NextResponse.next();
 
