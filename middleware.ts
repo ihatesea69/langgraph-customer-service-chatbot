@@ -24,8 +24,11 @@ export function middleware(request: NextRequest) {
   }
 
   // Check if accessing admin paths without admin auth
-  const isAdminPath = ADMIN_PATHS.some((path) => pathname.startsWith(path));
-  
+  // Exclude /admin/login itself to avoid redirect loop
+  const isAdminPath =
+    ADMIN_PATHS.some((path) => pathname.startsWith(path)) &&
+    pathname !== "/admin/login";
+
   if (isAdminPath && adminAuth !== "true") {
     const adminLoginUrl = new URL("/admin/login", request.url);
     return NextResponse.redirect(adminLoginUrl);
