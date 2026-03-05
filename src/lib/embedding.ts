@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { traceable } from "langsmith/traceable";
 
 const EMBEDDING_MODEL = "text-embedding-3-small";
 const MAX_CHUNK_SIZE = 1000; // characters per chunk
@@ -21,32 +22,38 @@ function getOpenAIClient(): OpenAI {
 /**
  * Generate embedding for a single text
  */
-export async function embedText(text: string): Promise<number[]> {
-  const client = getOpenAIClient();
+export const embedText = traceable(
+  async function embedText(text: string): Promise<number[]> {
+    const client = getOpenAIClient();
 
-  const response = await client.embeddings.create({
-    model: EMBEDDING_MODEL,
-    input: text,
-  });
+    const response = await client.embeddings.create({
+      model: EMBEDDING_MODEL,
+      input: text,
+    });
 
-  return response.data[0].embedding;
-}
+    return response.data[0].embedding;
+  },
+  { name: "embedText", run_type: "embedding", tags: ["openai", "embedding"] }
+);
 
 /**
  * Generate embeddings for multiple texts (batch)
  */
-export async function embedTexts(texts: string[]): Promise<number[][]> {
-  if (texts.length === 0) return [];
+export const embedTexts = traceable(
+  async function embedTexts(texts: string[]): Promise<number[][]> {
+    if (texts.length === 0) return [];
 
-  const client = getOpenAIClient();
+    const client = getOpenAIClient();
 
-  const response = await client.embeddings.create({
-    model: EMBEDDING_MODEL,
-    input: texts,
-  });
+    const response = await client.embeddings.create({
+      model: EMBEDDING_MODEL,
+      input: texts,
+    });
 
-  return response.data.map((d) => d.embedding);
-}
+    return response.data.map((d) => d.embedding);
+  },
+  { name: "embedTexts", run_type: "embedding", tags: ["openai", "embedding", "batch"] }
+);
 
 /**
  * Split text into overlapping chunks
@@ -140,11 +147,11 @@ export interface ProcessedDocument {
 /**
  * Process a document: chunk and embed
  */
-export async function processDocument(
-  content: string
-): Promise<ProcessedDocument> {
-  const chunks = chunkText(content);
-  const embeddings = await embedTexts(chunks);
-
-  return { chunks, embeddings };
-}
+export const processDocument = traceable(
+  async function processDocument(content: string): Promise<ProcessedDocument> {
+    const chunks = chunkText(content);
+    const embeddings = await embedTexts(chunks);
+    return { chunks, embeddings };
+  },
+  { name: "processDocument", run_type: "chain", tags: ["document", "ingestion"] }
+);

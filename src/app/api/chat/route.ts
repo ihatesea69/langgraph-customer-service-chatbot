@@ -4,6 +4,7 @@ import { tokenUsage } from "@/lib/token-usage";
 import { conversationService } from "@/lib/conversations";
 import { HumanMessage, AIMessage } from "@langchain/core/messages";
 import { NextRequest, NextResponse } from "next/server";
+import { traceable } from "langsmith/traceable";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -85,8 +86,27 @@ export async function POST(req: NextRequest) {
         : new AIMessage(msg.content)
     );
 
-    // Invoke agent
-    const response = await invokeAgent(langchainMessages, message);
+    // Invoke agent with LangSmith metadata for per-request tracing
+    const tracedInvokeAgent = traceable(
+      async () =>
+        invokeAgent(langchainMessages, message, {
+          userId,
+          conversationId: conversationId ?? undefined,
+        }),
+      {
+        name: "chat-request",
+        run_type: "chain",
+        tags: ["bonedoc-chatbot", "api"],
+        metadata: {
+          userId,
+          conversationId: conversationId ?? null,
+          messageLength: message.length,
+          historyLength: validatedHistory.length,
+        },
+      }
+    );
+
+    const response = await tracedInvokeAgent();
 
     // Track token usage (input + output)
     const inputTokens = estimateTokens(message + validatedHistory.map(m => m.content).join(""));

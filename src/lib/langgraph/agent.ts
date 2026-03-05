@@ -4,6 +4,12 @@ import { ToolNode } from "@langchain/langgraph/prebuilt";
 import { AIMessage, BaseMessage, HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { tools } from "./tools";
 
+export interface AgentInvokeOptions {
+  userId?: string;
+  conversationId?: string;
+  sessionId?: string;
+}
+
 const SYSTEM_PROMPT = `Bạn là trợ lý tư vấn AI của Phòng khám BONEDOC - chuyên khoa Chấn Thương Chỉnh Hình, Phục Hồi Chức Năng và Vật Lý Trị Liệu.
 
 **Phương châm phục vụ:** "Thấu Hiểu - Chân Thành - Yêu Thương"
@@ -84,12 +90,31 @@ function getAgent() {
 // Helper function to invoke agent with message history
 export async function invokeAgent(
   messages: BaseMessage[],
-  userMessage: string
+  userMessage: string,
+  options: AgentInvokeOptions = {}
 ): Promise<string> {
   const agent = getAgent();
-  const result = await agent.invoke({
-    messages: [...messages, new HumanMessage(userMessage)],
-  });
+  const { userId, conversationId, sessionId } = options;
+
+  // Build LangSmith run config with metadata for tracing
+  const runConfig = {
+    metadata: {
+      ...(userId && { userId }),
+      ...(conversationId && { conversationId }),
+      ...(sessionId && { sessionId }),
+      model: "gpt-4o-mini",
+    },
+    tags: [
+      "bonedoc-chatbot",
+      ...(userId ? [`user:${userId}`] : []),
+    ],
+    runName: "bonedoc-agent",
+  };
+
+  const result = await agent.invoke(
+    { messages: [...messages, new HumanMessage(userMessage)] },
+    runConfig
+  );
 
   const lastMessage = result.messages[result.messages.length - 1];
   
