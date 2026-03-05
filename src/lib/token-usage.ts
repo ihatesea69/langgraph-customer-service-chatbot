@@ -1,9 +1,4 @@
-import { Redis } from "@upstash/redis";
-
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-});
+import { kv } from "@vercel/kv";
 
 const DAILY_LIMIT = 10000; // tokens per day per user
 
@@ -19,7 +14,7 @@ function getTodayKey(): string {
 export const tokenUsage = {
   async getUsage(userId: string): Promise<TokenUsage> {
     const key = `tokens:${userId}`;
-    const data = await redis.get<TokenUsage>(key);
+    const data = await kv.get<TokenUsage>(key);
     const today = getTodayKey();
 
     // Reset if new day
@@ -34,7 +29,7 @@ export const tokenUsage = {
     const key = `tokens:${userId}`;
     const current = await this.getUsage(userId);
     
-    await redis.set(key, {
+    await kv.set(key, {
       tokensUsed: current.tokensUsed + tokens,
       lastReset: getTodayKey(),
     });

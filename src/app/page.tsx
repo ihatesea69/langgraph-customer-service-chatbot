@@ -2,419 +2,363 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useState } from "react";
 
-const faqs = [
+const services = [
   {
-    q: "Is HieuNghiGPT really free?",
-    a: "Yes. 10,000 tokens per day, reset at 00:00 UTC. No credit card required, no hidden fees.",
+    name: "Chấn thương thể thao",
+    desc: "Căng cơ, đứt dây chằng, gãy xương, trật khớp",
+    icon: "🏃",
   },
   {
-    q: "Is my data secure?",
-    a: "We don't store your code. Conversations are encrypted and only you have access.",
+    name: "Viêm rách chóp xoay vai",
+    desc: "Đau vai, giới hạn vận động, ảnh hưởng giấc ngủ",
+    icon: "💪",
   },
   {
-    q: "Why GitHub login?",
-    a: "Because you're a developer. One click, no forms, no new passwords to remember.",
+    name: "Phục hồi chức năng",
+    desc: "Phục hồi sau phẫu thuật chấn thương chỉnh hình",
+    icon: "🩺",
   },
   {
-    q: "How is this different from ChatGPT?",
-    a: "HieuNghiGPT is built with LangGraph - an agent capable of using tools and multi-step reasoning. Not just a GPT wrapper.",
+    name: "Thoái hóa khớp",
+    desc: "Cứng khớp, biến dạng, teo cơ, lỏng khớp",
+    icon: "🦴",
   },
   {
-    q: "Is there an API?",
-    a: "Not yet. But the project is open-source, you can self-host and customize.",
+    name: "Thoái hóa cột sống",
+    desc: "Đau khi thay đổi tư thế, ngồi lâu",
+    icon: "🔄",
+  },
+  {
+    name: "Đau cổ vai gáy",
+    desc: "Cứng cơ cạnh cột sống cổ, thắt lưng",
+    icon: "🧘",
+  },
+];
+
+const doctors = [
+  {
+    name: "TS.BS Dương Đình Triết",
+    specialty: "Chấn Thương Chỉnh Hình",
+    title: "Tiến Sĩ Bác Sĩ",
+  },
+  {
+    name: "ThS.BS Huỳnh Phương Nguyệt Anh",
+    specialty: "Phục Hồi Chức Năng",
+    title: "Thạc Sĩ Bác Sĩ",
+  },
+  {
+    name: "DS. Nguyễn Thị Thuỳ Dương",
+    specialty: "Dược lâm sàng",
+    title: "Dược Sĩ",
+  },
+  {
+    name: "ThS.KTV Nguyễn Thành Luân",
+    specialty: "Vật Lý Trị Liệu",
+    title: "Thạc Sĩ KTV",
   },
 ];
 
 export default function LandingPage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
   return (
-    <main className="min-h-screen bg-black text-white overflow-hidden">
+    <main className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 lg:px-12 py-6 bg-gradient-to-b from-black/80 to-transparent backdrop-blur-sm">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center">
-            <span className="text-xl font-bold text-black">H</span>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center">
+              <span className="text-lg font-bold text-white">B</span>
+            </div>
+            <span className="text-xl font-semibold text-gray-900">BONEDOC</span>
           </div>
-          <span className="text-xl font-semibold tracking-tight">HieuNghiGPT</span>
+          <div className="flex items-center gap-4">
+            <a
+              href="tel:+84903931868"
+              className="hidden sm:flex items-center gap-2 text-gray-600 hover:text-blue-600"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              090-3931-868
+            </a>
+            <Link
+              href="/login"
+              className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-colors"
+            >
+              Tư vấn ngay
+            </Link>
+          </div>
         </div>
-        <Link
-          href="/login"
-          className="px-6 py-2.5 bg-white/10 hover:bg-white/20 rounded-full text-sm font-medium transition-all backdrop-blur-sm border border-white/10"
-        >
-          Sign in
-        </Link>
       </nav>
 
-      {/* HERO SECTION - Attention */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <video autoPlay muted loop playsInline className="w-full h-full object-cover">
-            <source src="/hero-video.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-black/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50" />
-        </div>
-
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl sm:text-6xl lg:text-8xl font-bold tracking-tight mb-6"
-          >
-            <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
-              Code smarter,
-            </span>
-            <br />
-            <span className="text-white">
-              not harder.
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed"
-          >
-            HieuNghiGPT is your AI teammate. Ask anything about code, debugging, architecture - get instant answers. No setup, no friction.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <Link
-              href="/chat"
-              className="group px-10 py-5 bg-white text-black rounded-2xl font-semibold text-lg transition-all hover:scale-105 hover:bg-gray-100"
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              <span className="flex items-center gap-2">
-                Start for free
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+              <span className="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-6">
+                Chấn Thương Chỉnh Hình - Phục Hồi Chức Năng - Vật Lý Trị Liệu
               </span>
-            </Link>
-            <a
-              href="https://github.com/ihatesea69/langgraph-customer-service-chatbot"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-10 py-5 bg-white/10 hover:bg-white/20 rounded-2xl font-semibold text-lg transition-all border border-white/20 backdrop-blur-sm flex items-center gap-2"
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              View source
-            </a>
-          </motion.div>
-        </div>
+              Tư vấn sức khỏe
+              <br />
+              <span className="text-blue-600">xương khớp trực tuyến</span>
+            </motion.h1>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2"
-          >
-            <motion.div className="w-1.5 h-1.5 bg-white rounded-full" />
-          </motion.div>
-        </motion.div>
-      </section>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg sm:text-xl text-gray-600 mb-10"
+            >
+              Trợ lý AI của Phòng khám BONEDOC sẵn sàng tư vấn về triệu chứng, dịch vụ điều trị, và hướng dẫn đặt lịch hẹn 24/7.
+            </motion.p>
 
-      {/* SOCIAL PROOF - Infinite Scroll */}
-      <section className="py-16 border-b border-white/5 overflow-hidden">
-        <p className="text-center text-sm text-white/30 mb-10 tracking-widest uppercase">Trusted by developers from</p>
-        <div className="relative">
-          <div className="flex animate-marquee whitespace-nowrap">
-            {[...Array(2)].map((_, i) => (
-              <div key={i} className="flex items-center gap-16 mx-8">
-                {["GitHub", "Vercel", "OpenAI", "LangChain", "Upstash", "Next.js", "React", "TypeScript"].map((name) => (
-                  <span key={`${i}-${name}`} className="text-xl font-semibold text-white/30 hover:text-white/50 transition-colors">
-                    {name}
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PROBLEM / AGITATION - Interest */}
-      <section className="py-32 bg-gradient-to-b from-black to-red-950/10">
-        <div className="max-w-5xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-              Wasting time with <span className="text-red-400">ordinary AI chatbots?</span>
-            </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              { icon: "clock", title: "Lost context", desc: "Having to explain everything from scratch every new chat session." },
-              { icon: "lock", title: "Strict limits", desc: "Running out of quota mid-conversation. Forced to wait." },
-              { icon: "question", title: "Generic answers", desc: "AI that doesn't understand your codebase. Not actionable." },
-              { icon: "dollar", title: "High cost", desc: "$20/month for ChatGPT Plus still isn't enough for heavy use." },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-6 rounded-2xl bg-red-500/5 border border-red-500/20"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <Link
+                href="/login"
+                className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-lg transition-all hover:shadow-lg hover:shadow-blue-200 flex items-center justify-center gap-2"
               >
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-1">{item.title}</h3>
-                    <p className="text-white/50">{item.desc}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+                Bắt đầu tư vấn
+              </Link>
+              <a
+                href="tel:+84903931868"
+                className="px-8 py-4 bg-white border-2 border-gray-200 hover:border-blue-300 text-gray-700 rounded-xl font-semibold text-lg transition-all flex items-center justify-center gap-2"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                Gọi hotline
+              </a>
+            </motion.div>
           </div>
 
-          <motion.p
+          {/* Trust badges */}
+          <motion.div
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center text-white/50 mt-12 text-lg"
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="mt-16 flex flex-wrap items-center justify-center gap-8 text-gray-400"
           >
-            Every minute wasted with ineffective AI is a minute you could spend shipping new features.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* SOLUTION / FEATURES - Bento Grid - Desire */}
-      <section className="py-32 bg-black">
-        <div className="max-w-6xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-              An AI that <span className="text-white">actually gets it</span>
-            </h2>
-            <p className="text-xl text-white/50 max-w-2xl mx-auto">
-              Built with cutting-edge agent technology
-            </p>
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <span>Bảo mật thông tin</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <span>Tư vấn miễn phí</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <span>Hoạt động 24/7</span>
+            </div>
           </motion.div>
-
-          {/* Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Large card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="md:col-span-2 p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-3">LangGraph Agent</h3>
-              <p className="text-white/60 text-lg">
-                Not just chat - this is an AI agent capable of using tools, searching, and multi-step reasoning. Like having a senior dev by your side.
-              </p>
-            </motion.div>
-
-            {/* Medium card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center mb-6">
-                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold mb-3">10K Tokens/Day</h3>
-              <p className="text-white/60">Free. Actually free. No credit card, no trial that ends mid-project.</p>
-            </motion.div>
-
-            {/* Small cards row */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
-            >
-              <h3 className="font-bold mb-2">Conversation Memory</h3>
-              <p className="text-white/50 text-sm">Chat history saved. Return anytime, AI remembers your context.</p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.25 }}
-              className="p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
-            >
-              <h3 className="font-bold mb-2">GitHub OAuth</h3>
-              <p className="text-white/50 text-sm">One-click login. No long signup forms.</p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="p-6 rounded-3xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
-            >
-              <h3 className="font-bold mb-2">Open Source</h3>
-              <p className="text-white/50 text-sm">View code, fork, customize. 100% transparency.</p>
-            </motion.div>
-          </div>
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="py-32 bg-gradient-to-b from-black to-violet-950/10">
+      {/* Services Section */}
+      <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl sm:text-5xl font-bold text-center mb-16"
-          >
-            What developers are saying
-          </motion.h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Các bệnh điều trị nổi bật
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Phòng khám BONEDOC chuyên điều trị các bệnh lý về xương khớp, cơ bắp với đội ngũ chuyên gia hàng đầu
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { quote: "I've tried 5 different AI coding assistants. HieuNghiGPT is the only one that truly understands complex architecture patterns.", name: "Alex Chen", role: "Senior Developer" },
-              { quote: "10K free tokens per day? Enough for my entire workday. No more quota anxiety.", name: "Sarah Kim", role: "Freelance Developer" },
-              { quote: "Conversation memory is a game-changer. No more copy-pasting context every new chat.", name: "David Park", role: "Full-stack Developer" },
-            ].map((t, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, i) => (
               <motion.div
-                key={i}
+                key={service.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-8 rounded-3xl bg-white/5 border border-white/10"
+                className="p-6 rounded-2xl bg-gray-50 hover:bg-blue-50 transition-colors group"
               >
-                <p className="text-white/70 mb-6 leading-relaxed">"{t.quote}"</p>
-                <div>
-                  <p className="font-semibold">{t.name}</p>
-                  <p className="text-sm text-white/40">{t.role}</p>
-                </div>
+                <div className="text-4xl mb-4">{service.icon}</div>
+                <h3 className="font-semibold text-gray-900 text-lg mb-2 group-hover:text-blue-600 transition-colors">
+                  {service.name}
+                </h3>
+                <p className="text-gray-500">{service.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-32 bg-black">
-        <div className="max-w-3xl mx-auto px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl sm:text-5xl font-bold text-center mb-16"
-          >
-            Frequently asked questions
-          </motion.h2>
+      {/* Doctors Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Đội ngũ chuyên gia
+            </h2>
+            <p className="text-gray-600">
+              Được theo dõi và điều trị bởi các bác sĩ chuyên khoa giàu kinh nghiệm
+            </p>
+          </div>
 
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {doctors.map((doctor, i) => (
               <motion.div
-                key={i}
+                key={doctor.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="border border-white/10 rounded-2xl overflow-hidden"
+                transition={{ delay: i * 0.1 }}
+                className="bg-white rounded-2xl p-6 text-center shadow-sm"
               >
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-6 text-left hover:bg-white/5 transition-colors"
-                >
-                  <span className="font-medium">{faq.q}</span>
-                  <svg
-                    className={`w-5 h-5 text-white/50 transition-transform ${openFaq === i ? "rotate-180" : ""}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center">
+                  <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                </button>
-                {openFaq === i && (
-                  <div className="px-6 pb-6 text-white/60">{faq.a}</div>
-                )}
+                </div>
+                <p className="text-xs text-blue-600 font-medium mb-1">{doctor.title}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">{doctor.name}</h3>
+                <p className="text-sm text-gray-500">{doctor.specialty}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FINAL CTA - Action */}
-      <section className="py-32 bg-[#0a0a0a]">
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-700">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl sm:text-6xl font-bold mb-6"
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+            Bạn đang gặp vấn đề về xương khớp?
+          </h2>
+          <p className="text-blue-100 text-lg mb-10">
+            Đừng chờ đợi. Hãy trao đổi với trợ lý AI của chúng tôi ngay để được tư vấn sơ bộ và hướng dẫn đặt lịch khám.
+          </p>
+          <Link
+            href="/login"
+            className="inline-flex items-center gap-2 px-10 py-5 bg-white text-blue-600 rounded-2xl font-bold text-lg hover:bg-gray-100 transition-all shadow-lg"
           >
-            Ready to code with real AI?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-xl text-white/50 mb-12"
-          >
-            Join thousands of developers shipping faster every day.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <Link
-              href="/chat"
-              className="inline-flex items-center gap-2 px-12 py-6 bg-white text-black rounded-2xl font-bold text-lg hover:bg-white/90 transition-all hover:scale-105"
-            >
-              Start for free - No credit card
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-            <p className="text-sm text-white/30 mt-4">Sign up in 5 seconds with GitHub</p>
-          </motion.div>
+            Bắt đầu tư vấn miễn phí
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
         </div>
       </section>
+
+      {/* Contact Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* HCM Branch */}
+            <div className="bg-gray-50 rounded-2xl p-8">
+              <h3 className="font-bold text-xl text-gray-900 mb-4">
+                Chi nhánh Hồ Chí Minh
+              </h3>
+              <div className="space-y-3 text-gray-600">
+                <p className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  512 Ngô Gia Tự, Phường 9, Quận 5, TP.HCM
+                </p>
+                <p className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  (+84) 282-2142-816
+                </p>
+                <p className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Thứ 2-6: 8:00-19:30 | T7: 8:00-17:00 | CN: 8:00-12:00
+                </p>
+              </div>
+            </div>
+
+            {/* Dong Nai Branch */}
+            <div className="bg-gray-50 rounded-2xl p-8">
+              <h3 className="font-bold text-xl text-gray-900 mb-4">
+                Chi nhánh Long Khánh, Đồng Nai
+              </h3>
+              <div className="space-y-3 text-gray-600">
+                <p className="flex items-start gap-3">
+                  <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  77 Hồng Thập Tự, Xuân Bình, Long Khánh, Đồng Nai
+                </p>
+                <p className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  (+84) 032-7918-088
+                </p>
+                <p className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Hotline: (+84) 090-3931-868
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-400 py-12">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center">
+                <span className="text-lg font-bold text-white">B</span>
+              </div>
+              <div>
+                <span className="text-white font-semibold">BONEDOC</span>
+                <p className="text-sm">Thấu Hiểu - Chân Thành - Yêu Thương</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-6 text-sm">
+              <a href="https://bonedoc.vn" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                Website
+              </a>
+              <a href="mailto:Saigonothorpaedic@gmail.com" className="hover:text-white transition-colors">
+                Email
+              </a>
+              <span>© 2024 BONEDOC</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }

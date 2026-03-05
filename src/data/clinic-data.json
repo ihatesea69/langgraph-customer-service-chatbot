@@ -1,0 +1,157 @@
+{
+  "clinic": {
+    "name": "Phòng khám BONEDOC",
+    "fullName": "Phòng khám BONEDOC - Chấn Thương Chỉnh Hình - Phục Hồi Chức Năng",
+    "slogan": "Thấu Hiểu - Chân Thành - Yêu Thương",
+    "specialty": [
+      "Chấn Thương Chỉnh Hình",
+      "Phục Hồi Chức Năng",
+      "Vật Lý Trị Liệu"
+    ],
+    "website": "https://bonedoc.vn",
+    "email": "Saigonothorpaedic@gmail.com"
+  },
+  "branches": [
+    {
+      "id": "hcm",
+      "name": "Chi nhánh Hồ Chí Minh",
+      "address": "512 Ngô Gia Tự, Phường 9, Quận 5, Thành phố Hồ Chí Minh",
+      "phone": "(+84) 282-2142-816",
+      "hotline": "(+84) 090-3931-868",
+      "googleMapsUrl": "https://maps.google.com/?q=512+Ngo+Gia+Tu,+Phuong+9,+Quan+5,+Ho+Chi+Minh",
+      "directions": "Từ trung tâm Quận 1, đi theo đường Nguyễn Trãi hướng về Quận 5. Rẽ trái vào đường Ngô Gia Tự, phòng khám nằm ở số 512."
+    },
+    {
+      "id": "dongnai",
+      "name": "Chi nhánh Long Khánh, Đồng Nai",
+      "address": "77 Hồng Thập Tự, Xuân Bình, Long Khánh, Đồng Nai",
+      "phone": "(+84) 032-7918-088",
+      "hotline": "(+84) 090-3931-868",
+      "googleMapsUrl": "https://maps.google.com/?q=77+Hong+Thap+Tu,+Xuan+Binh,+Long+Khanh,+Dong+Nai",
+      "directions": "Từ Quốc lộ 1A, vào thành phố Long Khánh theo đường Hồng Thập Tự. Phòng khám nằm ở số 77."
+    }
+  ],
+  "doctors": [
+    {
+      "id": "dr-triet",
+      "name": "Tiến Sĩ Bác Sĩ Dương Đình Triết",
+      "title": "Tiến Sĩ Bác Sĩ",
+      "shortName": "TS.BS Dương Đình Triết",
+      "specialty": "Chấn Thương Chỉnh Hình",
+      "description": "Chuyên gia hàng đầu về chấn thương chỉnh hình, phẫu thuật nội soi khớp vai và khớp gối."
+    },
+    {
+      "id": "dr-nguyetanh",
+      "name": "Thạc Sĩ Bác Sĩ Huỳnh Phương Nguyệt Anh",
+      "title": "Thạc Sĩ Bác Sĩ",
+      "shortName": "ThS.BS Huỳnh Phương Nguyệt Anh",
+      "specialty": "Phục Hồi Chức Năng",
+      "description": "Chuyên gia phục hồi chức năng với nhiều năm kinh nghiệm trong điều trị các bệnh lý cơ xương khớp."
+    },
+    {
+      "id": "pharm-duong",
+      "name": "Dược Sĩ Nguyễn Thị Thuỳ Dương",
+      "title": "Dược Sĩ",
+      "shortName": "DS. Nguyễn Thị Thuỳ Dương",
+      "specialty": "Dược lâm sàng",
+      "description": "Tư vấn sử dụng thuốc và các phương pháp điều trị hỗ trợ."
+    },
+    {
+      "id": "kt-luan",
+      "name": "Thạc Sĩ KTV Nguyễn Thành Luân",
+      "title": "Thạc Sĩ Kỹ Thuật Viên",
+      "shortName": "ThS.KTV Nguyễn Thành Luân",
+      "specialty": "Vật Lý Trị Liệu",
+      "description": "Chuyên gia vật lý trị liệu với kỹ thuật điều trị tiên tiến."
+    }
+  ],
+  "services": [
+    {
+      "id": "sports-injury",
+      "name": "Chấn thương thể thao",
+      "description": "Điều trị căng cơ, đứt dây chằng, gãy xương, trật khớp, giãn gân do hoạt động thể thao.",
+      "symptoms": [
+        "Đau khi vận động",
+        "Sưng khớp",
+        "Bầm tím",
+        "Hạn chế vận động"
+      ]
+    },
+    {
+      "id": "rotator-cuff",
+      "name": "Viêm rách chóp xoay vai",
+      "description": "Đau nhức vùng vai, giới hạn vận động, không đưa tay quá đầu được, ảnh hưởng giấc ngủ.",
+      "symptoms": [
+        "Đau vai khi nằm nghiêng",
+        "Không đưa tay quá đầu",
+        "Yếu cơ vai",
+        "Đau tăng về đêm"
+      ]
+    },
+    {
+      "id": "rehabilitation",
+      "name": "Phục hồi chức năng sau phẫu thuật",
+      "description": "Phục hồi chức năng trước và sau các phẫu thuật chấn thương chỉnh hình, nội soi khâu chóp xoay, tái tạo dây chằng, cột sống.",
+      "symptoms": ["Sau phẫu thuật", "Giảm vận động", "Cứng khớp", "Teo cơ"]
+    },
+    {
+      "id": "osteoarthritis",
+      "name": "Thoái hóa khớp",
+      "description": "Điều trị cứng khớp, biến dạng khớp, teo cơ, lỏng khớp do thoái hóa.",
+      "symptoms": [
+        "Đau khớp khi đi lại",
+        "Cứng khớp buổi sáng",
+        "Tiếng kêu lạo xạo",
+        "Biến dạng khớp"
+      ]
+    },
+    {
+      "id": "spine-degeneration",
+      "name": "Thoái hóa cột sống",
+      "description": "Giới hạn vận động cột sống, đau cột sống khi thay đổi tư thế, ngồi lâu.",
+      "symptoms": [
+        "Đau lưng",
+        "Đau lan xuống chân",
+        "Tê bì chân tay",
+        "Khó xoay người"
+      ]
+    },
+    {
+      "id": "neck-shoulder-pain",
+      "name": "Đau cổ vai gáy",
+      "description": "Đau, cứng cơ cạnh cột sống cổ, thắt lưng. Đau sau khi ngủ dậy hoặc ngồi lâu trong 1 tư thế.",
+      "symptoms": ["Đau cổ gáy", "Cứng cổ", "Đau đầu phía sau", "Đau lan vai"]
+    },
+    {
+      "id": "physical-therapy",
+      "name": "Vật lý trị liệu",
+      "description": "Phương pháp điều trị không dùng thuốc, giúp giảm đau, phục hồi chức năng và cải thiện chất lượng cuộc sống.",
+      "symptoms": [
+        "Đau mạn tính",
+        "Hạn chế vận động",
+        "Sau chấn thương",
+        "Phòng ngừa"
+      ]
+    }
+  ],
+  "workingHours": {
+    "weekdays": {
+      "open": "08:00",
+      "close": "19:30"
+    },
+    "saturday": {
+      "open": "08:00",
+      "close": "17:00"
+    },
+    "sunday": {
+      "open": "08:00",
+      "close": "12:00"
+    },
+    "holidays": "Liên hệ trước khi đến"
+  },
+  "policies": {
+    "appointment": "Đặt lịch hẹn trước qua hotline hoặc nhắn tin Zalo/Facebook để được phục vụ nhanh nhất",
+    "insurance": "Hỗ trợ bảo hiểm y tế theo quy định",
+    "emergency": "Trường hợp cấp cứu vui lòng đến bệnh viện gần nhất hoặc gọi 115"
+  }
+}

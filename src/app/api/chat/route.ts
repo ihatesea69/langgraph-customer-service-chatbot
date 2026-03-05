@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+import { getSession } from "@/lib/auth";
 import { invokeAgent } from "@/lib/langgraph/agent";
 import { tokenUsage } from "@/lib/token-usage";
 import { conversationService } from "@/lib/conversations";
@@ -18,15 +18,15 @@ function estimateTokens(text: string): number {
 export async function POST(req: NextRequest) {
   try {
     // Auth check
-    const session = await auth();
-    if (!session?.user?.id) {
+    const session = await getSession();
+    if (!session) {
       return NextResponse.json(
         { error: "Vui lòng đăng nhập để sử dụng" },
         { status: 401 }
       );
     }
 
-    const userId = session.user.id;
+    const userId = session.id;
 
     // Check token limit
     const { allowed, remaining } = await tokenUsage.canUse(userId);
@@ -130,12 +130,12 @@ export async function POST(req: NextRequest) {
 // GET endpoint to check remaining tokens
 export async function GET() {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const session = await getSession();
+    if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { remaining } = await tokenUsage.canUse(session.user.id);
+    const { remaining } = await tokenUsage.canUse(session.id);
     return NextResponse.json({ 
       remaining,
       limit: tokenUsage.DAILY_LIMIT,

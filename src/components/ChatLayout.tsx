@@ -16,7 +16,11 @@ interface Conversation {
   updatedAt: number;
 }
 
-export default function ChatLayout() {
+interface ChatLayoutProps {
+  userName: string;
+}
+
+export default function ChatLayout({ userName }: ChatLayoutProps) {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -174,7 +178,7 @@ export default function ChatLayout() {
   };
 
   return (
-    <div className="flex h-screen bg-[#212121]">
+    <div className="flex h-screen bg-[#282a2e] overflow-hidden">
       <Sidebar
         conversations={conversations}
         activeId={activeId}
@@ -183,6 +187,7 @@ export default function ChatLayout() {
         onDelete={handleDeleteConversation}
         isCollapsed={sidebarCollapsed}
         onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
+        userName={userName}
       />
       <ChatArea
         messages={messages}

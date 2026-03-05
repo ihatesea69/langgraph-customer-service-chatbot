@@ -1,9 +1,4 @@
-import { Redis } from "@upstash/redis";
-
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-});
+import { kv } from "@vercel/kv";
 
 export interface Message {
   id: string;
@@ -26,12 +21,12 @@ const CONVERSATION_KEY = (userId: string, convId: string) => `conv:${userId}:${c
 export const conversationService = {
   // List all conversations for a user (metadata only)
   async list(userId: string): Promise<Omit<Conversation, "messages">[]> {
-    const keys = await redis.smembers(CONVERSATIONS_KEY(userId));
+    const keys = await kv.smembers(CONVERSATIONS_KEY(userId));
     if (!keys.length) return [];
 
     const conversations: Omit<Conversation, "messages">[] = [];
     for (const id of keys) {
-      const conv = await redis.get<Conversation>(CONVERSATION_KEY(userId, id));
+      const conv = await kv.get<Conversation>(CONVERSATION_KEY(userId, id as string));
       if (conv) {
         conversations.push({
           id: conv.id,
@@ -47,7 +42,7 @@ export const conversationService = {
 
   // Get a single conversation with messages
   async get(userId: string, convId: string): Promise<Conversation | null> {
-    return await redis.get<Conversation>(CONVERSATION_KEY(userId, convId));
+    return await kv.get<Conversation>(CONVERSATION_KEY(userId, convId));
   },
 
   // Create a new conversation
@@ -61,8 +56,8 @@ export const conversationService = {
       updatedAt: Date.now(),
     };
 
-    await redis.set(CONVERSATION_KEY(userId, id), conversation);
-    await redis.sadd(CONVERSATIONS_KEY(userId), id);
+    await kv.set(CONVERSATION_KEY(userId, id), conversation);
+    await kv.sadd(CONVERSATIONS_KEY(userId), id);
 
     return conversation;
   },
@@ -80,13 +75,13 @@ export const conversationService = {
       conv.title = message.content.slice(0, 50) + (message.content.length > 50 ? "..." : "");
     }
 
-    await redis.set(CONVERSATION_KEY(userId, convId), conv);
+    await kv.set(CONVERSATION_KEY(userId, convId), conv);
   },
 
   // Delete a conversation
   async delete(userId: string, convId: string): Promise<void> {
-    await redis.del(CONVERSATION_KEY(userId, convId));
-    await redis.srem(CONVERSATIONS_KEY(userId), convId);
+    await kv.del(CONVERSATION_KEY(userId, convId));
+    await kv.srem(CONVERSATIONS_KEY(userId), convId);
   },
 
   // Update conversation title
@@ -95,6 +90,6 @@ export const conversationService = {
     if (!conv) return;
     
     conv.title = title;
-    await redis.set(CONVERSATION_KEY(userId, convId), conv);
+    await kv.set(CONVERSATION_KEY(userId, convId), conv);
   },
 };

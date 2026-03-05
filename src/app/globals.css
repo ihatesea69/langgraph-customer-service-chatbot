@@ -1,8 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f172a;
-  --foreground: #f8fafc;
+  --background: #282a2e;
+  --foreground: #eeeeee;
+
+  /* Chat UI tokens */
+  --bg-left-panel: #1e1f22;
+  --bg-main: #282a2e;
+  --bg-sidebar-border: #3f424a;
+  --bg-input: #4b4f5b;
+  --bg-bubble-user: #4b4f5b;
+  --bg-bubble-ai: #28303f;
+  --bg-active-item: #1e1f22;
+
+  --text-primary: #eeeeee;
+  --text-secondary: #ababab;
+  --text-muted: rgba(171, 171, 171, 0.6);
+
+  --accent: #10a37f;
+  --accent-bright: #23c69e;
 }
 
 body {
